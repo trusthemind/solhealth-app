@@ -1,0 +1,16 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 120,
+  "importOrder": ["^@?\\w", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": ["public/**"],
+      "options": {
+        "printWidth": 1000
+      }
+    }
+  ]
+}
