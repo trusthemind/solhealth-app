@@ -1,6 +1,6 @@
+import ParallaxScrollView from '@/shared/ParallaxScrollView'
 import { Image, StyleSheet } from 'react-native'
 
-import ParallaxScrollView from '@/components/ParallaxScrollView'
 
 export default function HomeScreen() {
   return (

@@ -8,6 +8,7 @@ import { AppRoutes } from '@/constants/AppRoutes'
 import { LayoutDashboard } from '@tamagui/lucide-icons'
 import { User } from '@tamagui/lucide-icons'
 import { TabBar } from '@/shared/TabBar'
+import { Search } from '@tamagui/lucide-icons'
 
 export type NavigationTab = {
   name: string
@@ -19,6 +20,7 @@ export type NavigationTab = {
 const NavigationTabs: NavigationTab[] = [
   { name: 'dashboard', title: 'Dashboard', route: AppRoutes.DASHBOARD, icon: LayoutDashboard },
   { name: 'profile', title: 'Profile', route: AppRoutes.PROFILE, icon: User },
+  { name: 'asdasDl', title: 'asdasdl', route: '/asdasd', icon: Search },
 ]
 
 export default function TabLayout() {
