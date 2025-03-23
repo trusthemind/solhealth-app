@@ -9,6 +9,7 @@ import 'react-native-reanimated'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import tamaguiConfig from '@/tamagui.config'
 import { TamaguiProvider } from 'tamagui'
+import { AppRoutes } from '@/constants/AppRoutes'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
