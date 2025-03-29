@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { Colors } from '@/constants/Colors'
+import { MindStateCircle } from '@/features/MindStateCircle'
 
 export default function DashboardScreen() {
   const colorScheme = useColorScheme()
@@ -13,6 +14,9 @@ export default function DashboardScreen() {
         <Text style={[styles.subtitle, { color: Colors[colorScheme ?? 'light'].tabIconDefault }]}>
           Welcome to your dashboard
         </Text>
+        <View style={styles.mindStateContainer}>
+          <MindStateCircle />
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -20,15 +24,19 @@ export default function DashboardScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  content: {
+    display: 'flex',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  content: {
     padding: 20,
+    height: '100%',
+    width: '100%',
   },
   title: {
+    textAlign: 'center',
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 8,
@@ -37,4 +45,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  mindStateContainer: {},
 })

@@ -5,10 +5,8 @@ import { LinearGradient } from 'tamagui/linear-gradient'
 import { ChevronLeft, Home } from '@tamagui/lucide-icons'
 import { Image } from 'tamagui'
 import { AppRoutes } from '@/constants/AppRoutes'
-
 export default function NotFoundScreen() {
   const router = useRouter()
-
   return (
     <Theme name="light">
       <LinearGradient
