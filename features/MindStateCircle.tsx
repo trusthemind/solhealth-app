@@ -1,14 +1,20 @@
+import { MoodState } from '@/constants/MindStates'
 import { useState, useEffect } from 'react'
-import { Stack, Circle, Text, YStack, XStack, AnimatePresence, Slider } from 'tamagui'
+import { Stack, Circle, Text, YStack, XStack, Slider, View, Button } from 'tamagui'
 
-export function MindStateCircle() {
+type MindStateProps = {
+  openSheet: () => void
+  backgroundSetter: React.Dispatch<React.SetStateAction<string>>
+}
+
+export function MindStateCircle({ openSheet, backgroundSetter }: MindStateProps) {
   const [moodValue, setMoodValue] = useState(50)
   const [gradientColors, setGradientColors] = useState({
     start: 'hsl(200, 70%, 50%)',
     end: 'hsl(220, 70%, 60%)',
   })
+  const [isPulsing, setIsPulsing] = useState(true)
 
-  // Update colors based on mood value
   useEffect(() => {
     let start, end
 
@@ -35,118 +41,120 @@ export function MindStateCircle() {
     }
 
     setGradientColors({ start, end })
+    backgroundSetter(start)
   }, [moodValue])
 
-  // Get mood label based on value
   const getMoodLabel = () => {
-    if (moodValue < 20) return 'Very Unpleasant'
-    if (moodValue < 40) return 'Unpleasant'
-    if (moodValue < 60) return 'Neutral'
-    if (moodValue < 80) return 'Pleasant'
-    return 'Very Pleasant'
+    if (moodValue < 15) return MoodState.VeryUnpleasant
+    if (moodValue < 35) return MoodState.Unpleasant
+    if (moodValue < 50) return MoodState.Neutral
+    if (moodValue > 65) return MoodState.Pleasant
+    if (moodValue > 85) return MoodState.VeryPleasant
+    return MoodState.Neutral
   }
 
-  // Animation for the pulse effect
-  const [isPulsing, setIsPulsing] = useState(true)
-
-  // Animation for the mood change
-  const [key, setKey] = useState(0)
-
   useEffect(() => {
-    // Trigger animation when mood changes by changing the key
-    setKey((prev) => prev + 1)
-  }, [moodValue])
+    const interval = setInterval(() => {
+      setIsPulsing((prev) => !prev)
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <YStack padding="$4" alignItems="center" space="$4">
-      <Text fontSize="$6" fontWeight="bold">
-        Mood Visualizer
+    <YStack
+      padding="$4"
+      alignItems="center"
+      width={'100%'}
+      justifyContent="space-between"
+      height={'87.5%'}
+      // background={gradientColors.start}
+    >
+      <Text fontSize="$6" fontWeight="bold" color={'$black4'}>
+        Mind State
       </Text>
 
-      {/* Circle visualization */}
-      <AnimatePresence>
-        <Stack
-          key={key}
-          width={250}
-          height={250}
-          alignItems="center"
-          justifyContent="center"
-          animation="quick"
+      <Stack width={'100%'} height={'50%'} alignItems="center" justifyContent="center">
+        <Circle
+          size={300}
+          position="relative"
+          background={`linear-gradient(135deg, ${gradientColors.start}, ${gradientColors.end})`}
+          animation="bouncy"
           enterStyle={{
             scale: 0.9,
             opacity: 0.5,
           }}
-          exitStyle={{
-            scale: 1.1,
-            opacity: 0,
-          }}
+          shadowColor="$shadowColor"
+          shadowOffset={{ width: 0, height: 4 }}
+          shadowOpacity={0.3}
+          shadowRadius={12}
         >
+          {/* Wrapper to center all circles inside */}
           <Circle
             size={250}
-            backgroundColor={gradientColors.start}
-            animation="bouncy"
-            scale={1}
-            pressStyle={{ scale: 1.05 }}
-            shadowColor="$shadowColor"
-            shadowOffset={{ width: 0, height: 4 }}
-            shadowOpacity={0.3}
-            shadowRadius={8}
-          >
-            <Circle
-              size={180}
-              backgroundColor="rgba(255, 255, 255, 0.2)"
-              animation="quick"
-              scale={isPulsing ? 1 : 1.03}
-              onDidAnimate={() => {
-                setIsPulsing(!isPulsing)
-              }}
-            />
-          </Circle>
-        </Stack>
-      </AnimatePresence>
+            position="absolute"
+            backgroundColor="rgba(255, 255, 255, 0.1)"
+            animation="lazy"
+            scale={isPulsing ? 0.98 : 1.02}
+            opacity={isPulsing ? 0.8 : 1}
+          />
+          <Circle
+            size={180}
+            position="absolute"
+            backgroundColor="rgba(255, 255, 255, 0.15)"
+            animation="lazy"
+            scale={isPulsing ? 1.02 : 0.98}
+            opacity={isPulsing ? 1 : 0.8}
+          />
 
-      {/* Mood label */}
-      <Text fontSize="$4" fontWeight="500" marginTop="$2">
+          <Circle
+            size={100}
+            position="absolute"
+            backgroundColor="rgba(255, 255, 255, 0.2)"
+            animation="lazy"
+            scale={isPulsing ? 0.98 : 1.02}
+          />
+        </Circle>
+      </Stack>
+
+      <Text fontSize="$5" fontWeight="500" marginTop="$2" color="$black4">
         {getMoodLabel()}
       </Text>
 
-      {/* Range input using Tamagui's Slider */}
-      <YStack width="100%" maxWidth={400} marginTop="$4" paddingHorizontal="$4">
+      <XStack width="50%" gap={'1rem'} display="flex" flexDirection="row" justifyContent="center">
+        <Text fontSize="$2" color="$black4">
+          Unpleasant
+        </Text>
         <Slider
-          size="$4"
+          size="$12"
           width="100%"
-          defaultValue={[50]}
+          borderWidth={1}
+          borderColor={'$white4'}
           value={[moodValue]}
           max={100}
           step={1}
           onValueChange={(values: number[]) => setMoodValue(values[0])}
         >
-          <Slider.Track backgroundColor="$gray5">
-            <Slider.TrackActive backgroundColor={gradientColors.start} />
+          <Slider.Track backgroundColor="$white4">
+            <Slider.TrackActive background={`linear-gradient(90deg, ${gradientColors.start}, ${gradientColors.end})`} />
           </Slider.Track>
           <Slider.Thumb
             circular
             index={0}
-            size="$4"
+            size="$3"
             backgroundColor={gradientColors.end}
-            borderWidth={2}
-            borderColor="white"
-            shadowColor="black"
             shadowOpacity={0.2}
-            shadowRadius={2}
-            elevation={2}
+            shadowRadius={4}
+            elevation={4}
           />
         </Slider>
 
-        <XStack justifyContent="space-between" marginTop="$2">
-          <Text fontSize="$2" color="$gray11">
-            Unpleasant
-          </Text>
-          <Text fontSize="$2" color="$gray11">
-            Pleasant
-          </Text>
-        </XStack>
-      </YStack>
+        <Text fontSize="$2" color="$black4">
+          Pleasant
+        </Text>
+      </XStack>
+      <Button width={'100%'} borderRadius={24} backgroundColor={gradientColors.end} onPress={openSheet}>
+        Track
+      </Button>
     </YStack>
   )
 }

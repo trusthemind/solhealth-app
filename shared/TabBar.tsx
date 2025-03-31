@@ -1,5 +1,4 @@
 import { View, StyleSheet } from 'react-native'
-import React from 'react'
 import { Link, RelativePathString } from 'expo-router'
 import { NavigationTab } from '@/app/(tabs)/_layout'
 import TabBarButton from './TabBarButton'
