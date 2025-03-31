@@ -26,7 +26,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      tabBar={(props) => <TabBar {...props} tabs={NavigationTabs} />}
+      tabBar={(props) => <TabBar  {...props} tabs={NavigationTabs} />}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,

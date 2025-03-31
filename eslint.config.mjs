@@ -24,7 +24,7 @@ export default [
       prettier
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      "no-unused-vars": "warn",
       'react/react-in-jsx-scope': 'off',
       'prettier/prettier': 'warn',
       "no-undef": "off"
