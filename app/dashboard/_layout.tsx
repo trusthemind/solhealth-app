@@ -1,9 +1,5 @@
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { Platform } from 'react-native'
-
-import { Colors } from '@/constants/Colors'
-import { useColorScheme } from '@/hooks/useColorScheme'
 import { AppRoutes } from '@/constants/AppRoutes'
 import { LayoutDashboard } from '@tamagui/lucide-icons'
 import { User } from '@tamagui/lucide-icons'
@@ -22,13 +18,11 @@ const NavigationTabs: NavigationTab[] = [
 ]
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme()
-
   return (
     <Tabs
-      tabBar={(props) => <TabBar  {...props} tabs={NavigationTabs} />}
+      tabBar={(props) => <TabBar {...props} tabs={NavigationTabs} />}
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        // tabBarActiveTintColor: Colors[colorScheme ?? 'dark'].tint,
         headerShown: false,
       }}
     ></Tabs>
