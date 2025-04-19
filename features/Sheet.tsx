@@ -3,9 +3,10 @@ import { Sheet } from 'tamagui'
 
 type SheetProps = {
   open: boolean
+  children: React.ReactNode
 }
 
-export function CustomSheet({ open }: SheetProps) {
+export function CustomSheet({ open, children }: SheetProps) {
   return (
     <Sheet open={open} animation="medium" zIndex={100}>
       <Sheet.Overlay
@@ -17,7 +18,7 @@ export function CustomSheet({ open }: SheetProps) {
 
       <Sheet.Handle />
       <Sheet.Frame padding="$4" justifyContent="center" alignItems="center" gap="$5">
-        fsdfsdfsdfsdfsdf
+        {children}
       </Sheet.Frame>
     </Sheet>
   )

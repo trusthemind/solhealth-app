@@ -15,7 +15,7 @@ export default function DashboardScreen() {
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <View style={styles.content}>
         <MindStateCircle openSheet={handleSheetOpen} backgroundSetter={setBackgroundColor} />
-        <CustomSheet open={isOpenSheet} />
+        <CustomSheet open={isOpenSheet}>asdasdasd</CustomSheet>
       </View>
     </SafeAreaView>
   )
