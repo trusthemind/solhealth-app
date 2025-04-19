@@ -1,21 +1,12 @@
+import { DashboardHeader } from '@/features/dashboard/Header'
 import { View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MindStateCircle } from '@/features/MindStateCircle'
-import { CustomSheet } from '@/features/Sheet'
-import { useState } from 'react'
 
 export default function DashboardScreen() {
-  const [isOpenSheet, setIsOpenSheet] = useState(false)
-  const [backgroundColor, setBackgroundColor] = useState<string>(`hsl(90, 75%, 55%)`)
-
-  const handleSheetOpen = () => {
-    setIsOpenSheet(true)
-  }
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor }]}>
+    <SafeAreaView style={[styles.container]}>
       <View style={styles.content}>
-        <MindStateCircle openSheet={handleSheetOpen} backgroundSetter={setBackgroundColor} />
-        <CustomSheet open={isOpenSheet}>asdasdasd</CustomSheet>
+        <DashboardHeader />
       </View>
     </SafeAreaView>
   )
