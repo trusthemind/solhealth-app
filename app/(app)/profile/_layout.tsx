@@ -1,14 +1,10 @@
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { Platform } from 'react-native'
-
 import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { AppRoutes } from '@/constants/AppRoutes'
-import { LayoutDashboard } from '@tamagui/lucide-icons'
-import { User } from '@tamagui/lucide-icons'
+import { LayoutDashboard, User, Search } from '@tamagui/lucide-icons'
 import { TabBar } from '@/shared/TabBar'
-import { Search } from '@tamagui/lucide-icons'
 
 export type NavigationTab = {
   name: string
@@ -33,6 +29,6 @@ export default function ProfileLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
       }}
-    ></Tabs>
+    />
   )
 }
