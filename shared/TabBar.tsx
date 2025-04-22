@@ -1,5 +1,5 @@
 import { Link, RelativePathString } from 'expo-router'
-import { NavigationTab } from '@/app/(tabs)/_layout'
+import { NavigationTab } from '@/app/(auth)/_layout'
 import TabBarButton from './TabBarButton'
 import { XStack, styled, useTheme } from 'tamagui'
 

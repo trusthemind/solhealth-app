@@ -1,36 +1,39 @@
-import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
-import * as SplashScreen from 'expo-splash-screen'
-import { useEffect } from 'react'
-import 'react-native-reanimated'
-import { useColorScheme } from '@/hooks/useColorScheme'
-import tamaguiConfig from '@/tamagui.config'
 import { TamaguiProvider } from 'tamagui'
+import tamaguiConfig from '@/tamagui.config'
+import { router, useSegments } from 'expo-router'
+import { AuthProvider, useAuth } from '@/hooks/authContext'
+import { useEffect } from 'react'
+import LoginLayout from './(auth)/login/_layout'
+import DashboardLayout from './(app)/dashboard/_layout'
+import { AppRoutes } from '@/constants/AppRoutes'
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync()
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme()
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  })
+function MainLayout() {
+  const { authState } = useAuth()
+  const segments = useSegments()
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync()
+    if (!authState.authenticated && segments[0] !== '(auth)') {
+      router.replace(AppRoutes.LOGIN)
     }
-  }, [loaded])
 
-  if (!loaded) {
-    return null
+    if (authState.authenticated && segments[0] === '(auth)') {
+      router.replace(AppRoutes.DASHBOARD)
+    }
+  }, [authState, segments, router])
+
+  if (!authState.authenticated) {
+    return <LoginLayout />
   }
 
+  return <DashboardLayout />
+}
+
+export default function RootLayout() {
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={'light'}>
-      <Stack>
-        <Stack.Screen name="index" />
-      </Stack>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+      <AuthProvider>
+        <MainLayout />
+      </AuthProvider>
     </TamaguiProvider>
   )
 }

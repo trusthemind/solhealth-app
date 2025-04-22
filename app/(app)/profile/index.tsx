@@ -36,7 +36,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: getBgColor(profile.customBG) }]}>
-      <YStack f={1} padding="$4" space="$4" animation="bouncy" width="100%">
+      <YStack padding="$4" space="$4" animation="bouncy" width="100%">
         <H2 fontWeight="bold">Profile</H2>
 
         <YStack
@@ -152,5 +152,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-  }, 
+  },
 })

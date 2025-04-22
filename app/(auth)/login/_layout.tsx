@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { Platform } from 'react-native'
 
 import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
@@ -23,7 +22,7 @@ const NavigationTabs: NavigationTab[] = [
   { name: 'asdasDl', title: 'asdasdl', route: '/asdasd', icon: Search },
 ]
 
-export default function TabLayout() {
+export default function LoginLayout() {
   const colorScheme = useColorScheme()
 
   return (
