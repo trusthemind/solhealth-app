@@ -1,8 +1,8 @@
 export enum AppRoutes {
   DEFAULT = '/',
   CIRCLE = '/circle',
-  PROFILE = '/profile',
-  DASHBOARD = '/dashboard',
-  LOGIN = '/auth/login',
-  REGISTRATION = '/auth/registration',
+  PROFILE = '/(app)/profile',
+  DASHBOARD = '/(app)/dashboard',
+  LOGIN = '/(auth)/login',
+  REGISTRATION = '/(auth)/registration',
 }

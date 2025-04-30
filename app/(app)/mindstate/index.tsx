@@ -15,7 +15,7 @@ export default function MindStateScreen() {
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <View style={styles.content}>
         <MindStateCircle openSheet={handleSheetOpen} backgroundSetter={setBackgroundColor} />
-        <CustomSheet open={isOpenSheet} />
+        <CustomSheet open={isOpenSheet}>asd</CustomSheet>
       </View>
     </SafeAreaView>
   )
